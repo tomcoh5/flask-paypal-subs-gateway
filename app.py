@@ -4,7 +4,6 @@ from flask_cors import CORS
 import json
 import mysql.connector
 
-import stripe 
 import os 
 import requests
 from oauthlib.oauth2 import WebApplicationClient
