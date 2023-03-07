@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Registration and Login Form</title>
@@ -19,32 +19,5 @@
 	<script src="{{ url_for('static', filename='js/app.js') }}"></script>
 
 </body>
-</html>
-	{% endif %} -->
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Paddle Checkout Example</title>
-</head>
-<body>
-	<h1>Product Name</h1>
-	<p>Price: $10.00</p>
-	<button id="checkout-button">Buy Now</button>
-	<script src="https://cdn.paddle.com/paddle/paddle.js"></script>
-	<script>
-		var checkoutButton = document.getElementById('checkout-button');
-		checkoutButton.addEventListener('click', function() {
-			Paddle.Checkout.open({
-				product: 12345, // replace with your product ID
-				successCallback: function(data) {
-					console.log('Payment success:', data);
-				},
-				closeCallback: function() {
-					console.log('Payment closed');
-				}
-			});
-		});
-	</script>
-</body>
+	{% endif %}
 </html>
