@@ -20,11 +20,6 @@ db = mysql.connector.connect(
     password='my-mysql-password',
     database='web'
 )
-GOOGLE_CLIENT_ID = "266443254150-9huuultd8ifrpjb3emd2iou4s2gk30tl.apps.googleusercontent.com"
-GOOGLE_CLIENT_SECRET = "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"
-GOOGLE_DISCOVERY_URL = (
-    "https://accounts.google.com/.well-known/openid-configuration"
-)
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 
@@ -119,7 +114,17 @@ def secret():
         return render_template("payment.html")
     return render_template('secret.html')
 
+kubectl -n kube-system get cm anodot-forecast.v1276 -o jsonpath="{.data.release}" | \
+base64 -d | gunzip | \
+hprotoc --decode hapi.release.Release  $(find ~/remove/helm/_proto/hapi -name "*.proto"  -exec echo -n "{} " \;)\
+> ~/Work/forecast_fix/anodot-forecast.v127.txt
 
+
+
+kubectl -n kube-system get cm anodot-forecast.v126 -o jsonpath="{.data.release}" | \
+base64 -d | gunzip | \
+hprotoc --decode hapi.release.Release  $(find ~/remove/helm/_proto/hapi -name "*.proto"  -exec echo -n "{} " \;)\
+> ~/Work/forecast_fix/anodot-forecast.v126.txt
 @app.route("/", methods=["GET"])
 def home():
     return render_template("home.html")
