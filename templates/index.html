@@ -2,42 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <div id="paypal-button"></div>
-
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
-
+    <div id="paypal-button-container-P-7C008734JU015435AMQGCRNQ"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=AUIr_q7GSlbowJHNbaAhx4jTIxFCvTv94gt8UcQIuzPuWh5jLJsT5gDhnsBtPkNfnGOPSlvSUM54gtOX&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
 <script>
-    var CREATE_PAYMENT_URL  = 'http://127.0.0.1:5000/payment';
-    var EXECUTE_PAYMENT_URL = 'http://127.0.0.1:5000/execute';
-
-    paypal.Button.render({
-
-        env: 'sandbox', // Or 'sandbox'
-
-        commit: true, // Show a 'Pay Now' button
-
-        payment: function() {
-            return paypal.request.post(CREATE_PAYMENT_URL).then(function(data) {
-                return data.paymentID;
-            });
-        },
-
-        onAuthorize: function(data) {
-            return paypal.request.post(EXECUTE_PAYMENT_URL, {
-                paymentID: data.paymentID,
-                payerID:   data.payerID
-            }).then(function(res) {
-
-                console.log(res.success)
-                // The payment is complete!
-                // You can now show a confirmation message to the customer
-            });
-        }
-
-    }, '#paypal-button');
+  paypal.Buttons({
+      style: {
+          shape: 'rect', 
+          color: 'gold',
+          layout: 'vertical',
+          label: 'subscribe'
+      },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          /* Creates the subscription */
+          plan_id: 'P-7C008734JU015435AMQGCRNQ'
+        });  
+      },
+      onApprove: function(data, actions) {
+        alert(data.subscriptionID); // You can add optional success message for the subscriber here
+      }
+  }).render('#paypal-button-container-P-7C008734JU015435AMQGCRNQ'); // Renders the PayPal button
 </script>
 </body>
 </html>
